@@ -1,0 +1,506 @@
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+<head>
+  <b:skin><![CDATA[
+/* === RESET === */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans Devanagari',Arial,sans-serif;background:#f2f2f2;color:#222;font-size:14px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1100px;margin:0 auto;padding:0 14px}
+
+/* === TOP BAR === */
+#topbar{background:#1a1a1a;color:#bbb;font-size:11px;padding:5px 0;border-bottom:2px solid #d62828}
+#topbar .tb-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+#topbar a{color:#bbb;margin-left:10px;transition:color 0.2s}
+#topbar a:hover{color:#d62828}
+#topbar .tb-social a{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:3px;background:#333;color:#fff;font-size:10px;margin-left:4px;font-weight:bold}
+#topbar .tb-social .fb{background:#1877f2}
+#topbar .tb-social .wa{background:#25d366}
+#topbar .tb-social .tg{background:#0088cc}
+#topbar .tb-social .yt{background:#ff0000}
+
+/* === BREAKING NEWS TICKER === */
+#breaking{background:#d62828;display:flex;align-items:stretch;overflow:hidden;min-height:34px}
+#breaking .bn-tag{background:#7b0000;color:#fff;padding:8px 16px;font-size:11px;font-weight:bold;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;letter-spacing:0.5px;text-transform:uppercase;border-right:3px solid #ff4444}
+#breaking .bn-scroll{overflow:hidden;flex:1;display:flex;align-items:center}
+#breaking .bn-track{display:inline-block;white-space:nowrap;animation:ticker 35s linear infinite;font-size:12px;color:#fff;padding-left:30px}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+
+/* === HEADER === */
+#header{background:#fff;border-bottom:4px solid #d62828;padding:12px 0;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+#header .h-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+#logo-wrap{}
+#logo-text{font-size:30px;font-weight:bold;color:#d62828;font-family:'Noto Sans Devanagari',Arial,sans-serif;line-height:1.1}
+#logo-text span{color:#1a1a1a}
+#logo-sub{font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+#header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-date{font-size:11px;color:#888;border:1px solid #eee;padding:5px 10px;border-radius:4px}
+#search-wrap{display:flex;border:1.5px solid #e0e0e0;border-radius:4px;overflow:hidden;transition:border-color 0.2s}
+#search-wrap:focus-within{border-color:#d62828}
+#search-wrap input{border:none;outline:none;padding:7px 12px;font-size:12px;width:190px;background:#fff;color:#222}
+#search-wrap button{background:#d62828;border:none;color:#fff;padding:7px 14px;cursor:pointer;font-size:13px;transition:background 0.2s}
+#search-wrap button:hover{background:#a81b1b}
+
+/* === NAV === */
+#nav{background:#1a1a1a;position:sticky;top:0;z-index:99;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+#nav ul{list-style:none;display:flex;flex-wrap:wrap;padding:0 4px;margin:0}
+#nav ul li a{display:block;padding:11px 13px;color:#ddd;font-size:12px;font-weight:bold;letter-spacing:0.3px;transition:background 0.2s,color 0.2s;white-space:nowrap}
+#nav ul li a:hover{background:#d62828;color:#fff}
+#nav ul li.active a{background:#d62828;color:#fff}
+
+/* === FEATURED SECTION === */
+#featured{background:#fff;padding:16px 0;border-bottom:1px solid #e5e5e5}
+.feat-wrap{display:grid;grid-template-columns:3fr 2fr;gap:14px;align-items:start}
+.feat-main-card{position:relative;border-radius:6px;overflow:hidden;background:#222}
+.feat-main-card img{width:100%;height:270px;object-fit:cover;opacity:0.92;transition:opacity 0.3s}
+.feat-main-card:hover img{opacity:1}
+.feat-main-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.9));padding:16px}
+.feat-label{background:#d62828;color:#fff;font-size:10px;padding:3px 9px;border-radius:3px;display:inline-block;margin-bottom:7px;font-weight:bold;letter-spacing:0.5px}
+.feat-main-title{color:#fff;font-size:16px;font-weight:bold;line-height:1.4}
+.feat-main-meta{color:#ccc;font-size:10px;margin-top:5px}
+.feat-list{display:flex;flex-direction:column;gap:10px}
+.feat-list-item{background:#fff;border:1px solid #ebebeb;border-radius:6px;display:flex;gap:0;overflow:hidden;transition:box-shadow 0.2s}
+.feat-list-item:hover{box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+.feat-list-item img{width:90px;height:72px;object-fit:cover;flex-shrink:0}
+.feat-list-info{padding:9px 10px;display:flex;flex-direction:column;justify-content:center}
+.fli-cat{font-size:9px;color:#d62828;font-weight:bold;text-transform:uppercase;margin-bottom:3px}
+.fli-title{font-size:12px;color:#1a1a1a;font-weight:bold;line-height:1.4}
+.fli-meta{font-size:9px;color:#999;margin-top:4px}
+
+/* === SECTION HEADING === */
+.sec-head{display:flex;align-items:center;margin-bottom:14px;padding-bottom:8px;border-bottom:3px solid #d62828}
+.sec-head h2{font-size:15px;font-weight:bold;color:#1a1a1a;padding-right:10px;white-space:nowrap}
+.sec-head .sh-line{flex:1;height:1px;background:#e5e5e5}
+
+/* === MAIN LAYOUT === */
+#main-body{padding:18px 0}
+.body-grid{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+
+/* === NEWS CARDS === */
+.posts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.post-card{background:#fff;border:1px solid #ebebeb;border-radius:6px;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s}
+.post-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.09);transform:translateY(-2px)}
+.post-card img{width:100%;height:130px;object-fit:cover}
+.post-card-body{padding:10px}
+.pc-cat{font-size:9px;color:#d62828;font-weight:bold;text-transform:uppercase;margin-bottom:4px}
+.pc-title{font-size:13px;font-weight:bold;color:#1a1a1a;line-height:1.4;margin-bottom:5px}
+.pc-meta{font-size:10px;color:#999}
+.pc-excerpt{font-size:11px;color:#666;margin-top:5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* === SIDEBAR === */
+.sidebar-block{background:#fff;border:1px solid #ebebeb;border-radius:6px;padding:14px;margin-bottom:16px}
+.sp-item{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid #f4f4f4;align-items:flex-start}
+.sp-item:last-child{border-bottom:none;padding-bottom:0}
+.sp-item img{width:64px;height:52px;object-fit:cover;border-radius:4px;flex-shrink:0}
+.sp-num{width:24px;height:24px;background:#d62828;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;flex-shrink:0}
+.sp-cat{font-size:9px;color:#d62828;font-weight:bold;margin-bottom:2px}
+.sp-title{font-size:11px;font-weight:bold;color:#222;line-height:1.4}
+.sp-meta{font-size:9px;color:#999;margin-top:2px}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.tag-pill{background:#f5f5f5;border:1px solid #e5e5e5;color:#444;font-size:11px;padding:4px 10px;border-radius:20px;transition:background 0.2s,color 0.2s}
+.tag-pill:hover{background:#d62828;color:#fff;border-color:#d62828}
+.ad-slot{background:#f8f8f8;border:1px dashed #ddd;border-radius:4px;padding:14px;text-align:center;font-size:11px;color:#aaa}
+
+/* === SOCIAL SHARE === */
+#share-bar{background:#fff;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;padding:10px 0}
+#share-bar .sb-inner{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sb-label{font-size:11px;color:#666;font-weight:bold}
+.sh-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:4px;color:#fff;font-size:11px;font-weight:bold;cursor:pointer;border:none;text-decoration:none;transition:opacity 0.2s}
+.sh-btn:hover{opacity:0.85}
+.sh-fb{background:#1877f2}.sh-wa{background:#25d366}.sh-tw{background:#000}.sh-tg{background:#0088cc}.sh-cp{background:#555}
+
+/* === POST PAGE SHARE === */
+.post-share{margin:16px 0;padding:14px;background:#fafafa;border-radius:6px;border:1px solid #ebebeb}
+.post-share p{font-size:12px;color:#666;margin-bottom:8px;font-weight:bold}
+.post-share .share-row{display:flex;gap:6px;flex-wrap:wrap}
+
+/* === PAGINATION === */
+.blog-pager{text-align:center;margin:16px 0}
+.blog-pager a{display:inline-block;padding:8px 18px;background:#d62828;color:#fff;border-radius:4px;font-size:12px;font-weight:bold;margin:0 4px;transition:background 0.2s}
+.blog-pager a:hover{background:#a81b1b}
+
+/* === FOOTER === */
+#footer{background:#111;color:#888;margin-top:16px}
+.footer-top{padding:24px 0;border-bottom:1px solid #222}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.footer-col h3{color:#fff;font-size:13px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #d62828;display:inline-block}
+.footer-col p{font-size:11px;line-height:1.7;color:#888}
+.footer-col ul{list-style:none;padding:0}
+.footer-col ul li{padding:4px 0;border-bottom:1px solid #1f1f1f}
+.footer-col ul li a{font-size:11px;color:#888;transition:color 0.2s}
+.footer-col ul li a:hover{color:#d62828}
+.footer-bottom{padding:12px 0;text-align:center;font-size:11px}
+.footer-bottom strong{color:#fff}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.footer-links a{color:#888;font-size:11px}
+.footer-links a:hover{color:#d62828}
+
+/* === SINGLE POST === */
+.post-content{background:#fff;padding:20px;border-radius:6px;border:1px solid #ebebeb;line-height:1.8}
+.post-content h1,.post-header-title{font-size:20px;font-weight:bold;color:#1a1a1a;line-height:1.4;margin-bottom:10px}
+.post-content img{border-radius:6px;margin:12px 0}
+.post-meta-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#999}
+.post-meta-bar .pm-cat{background:#d62828;color:#fff;padding:3px 9px;border-radius:3px;font-size:10px;font-weight:bold}
+.post-content p{margin-bottom:14px}
+
+/* === RESPONSIVE === */
+@media(max-width:800px){
+  .feat-wrap,.body-grid,.footer-grid{grid-template-columns:1fr}
+  .posts-grid{grid-template-columns:1fr}
+  .feat-main-card img{height:200px}
+  #search-wrap input{width:140px}
+  #logo-text{font-size:22px}
+}
+]]></b:skin>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width,initial-scale=1' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title>
+    <b:if cond='data:blog.pageType == &quot;index&quot;'>फक्त बातमी | Marathi News - महाराष्ट्र, राजकारण, क्रीडा
+    <b:elseif cond='data:blog.pageType == &quot;item&quot;'/><data:blog.pageName/> | फक्त बातमी
+    <b:else/><data:blog.pageName/> | फक्त बातमी
+    </b:if>
+  </title>
+  <meta content='फक्त बातमी - महाराष्ट्रातील ताज्या बातम्या, राजकारण, क्रीडा, मनोरंजन आणि जगभरातील बातम्या.' name='description'/>
+  <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&amp;display=swap' rel='stylesheet'/>
+</head>
+
+<body>
+
+<!-- ════ TOP BAR ════ -->
+<div id='topbar'>
+  <div class='container'>
+    <div class='tb-inner'>
+      <span id='fb-date'>मंगळवार, ५ मे २०२६</span>
+      <div style='display:flex;align-items:center;gap:4px'>
+        <div class='tb-social'>
+          <a class='fb' href='https://facebook.com/faktbatmi' rel='noopener' target='_blank' title='Facebook'>f</a>
+          <a class='wa' href='https://wa.me/channel/faktbatmi' rel='noopener' target='_blank' title='WhatsApp'>W</a>
+          <a class='tg' href='https://t.me/faktbatmi' rel='noopener' target='_blank' title='Telegram'>T</a>
+          <a class='yt' href='https://youtube.com/@faktbatmi' rel='noopener' target='_blank' title='YouTube'>Y</a>
+        </div>
+        <a href='/p/about-us.html' style='margin-left:8px'>आमच्याबद्दल</a>
+        <a href='/p/contact.html'>संपर्क</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ BREAKING NEWS TICKER ════ -->
+<div id='breaking'>
+  <div class='bn-tag'>🔴 ताज्या बातम्या</div>
+  <div class='bn-scroll'>
+    <!-- ✏️ UPDATE: Change these headlines to your current breaking news -->
+    <span class='bn-track'>
+      ● खाजगी शाळांकडून गणवेश-पुस्तकांसाठी पालकास सक्ती बंद; शासनाचे कडक निर्देश &nbsp;&nbsp;&nbsp;
+      ● चंद्रपूरचे नवे पोलीस अधीक्षक आयुष नोपानी यांची सदिच्छा भेट &nbsp;&nbsp;&nbsp;
+      ● वरोरा-नागपूर महामार्गावर भीषण अपघात; दुचाकीस्वारासह मित्राचा जागीच मृत्यू &nbsp;&nbsp;&nbsp;
+      ● कत्तलीसाठी नेली जात असलेली ३० जनावरे वाचवली; पोलिसांचा मोठा छापा &nbsp;&nbsp;&nbsp;
+      ● faktbatmi.com वर सर्व ताज्या बातम्यांसाठी भेट द्या &nbsp;&nbsp;&nbsp;
+    </span>
+  </div>
+</div>
+
+<!-- ════ HEADER ════ -->
+<div id='header'>
+  <div class='container'>
+    <div class='h-inner'>
+      <div id='logo-wrap'>
+        <a href='/'><div id='logo-text'>फक्त <span>बातमी</span></div></a>
+        <div id='logo-sub'>faktbatmi.com · महाराष्ट्र · भारत · जग</div>
+      </div>
+      <div id='header-right'>
+        <div class='header-date' id='en-date'>Tuesday, 05 May 2026</div>
+        <form action='/search' id='search-wrap' method='get'>
+          <input name='q' placeholder='बातमी शोधा...' type='text'/>
+          <button title='Search' type='submit'>🔍</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ NAVIGATION ════ -->
+<nav id='nav'>
+  <div class='container'>
+    <ul>
+      <li><a href='/'>🏠 मुख्यपृष्ठ</a></li>
+      <!-- ✏️ These labels must match your Blogger post labels EXACTLY -->
+      <li><a href='/search/label/चेतन लूतडे'>चंद्रपूर</a></li>
+      <li><a href='/search/label/Maharashtra'>महाराष्ट्र</a></li>
+      <li><a href='/search/label/Politics'>राजकारण</a></li>
+      <li><a href='/search/label/Crime'>गुन्हेगारी</a></li>
+      <li><a href='/search/label/Accident'>अपघात</a></li>
+      <li><a href='/search/label/Sports'>क्रीडा</a></li>
+      <li><a href='/search/label/Education'>शिक्षण</a></li>
+      <li><a href='/search/label/Business'>व्यवसाय</a></li>
+      <li><a href='/search/label/World'>जग</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════ AD BANNER (uncomment after AdSense approval) ════ -->
+<!--
+<div style='background:#fff;padding:8px 0;text-align:center;border-bottom:1px solid #eee'>
+  <div class='container'>
+    YOUR ADSENSE LEADERBOARD AD CODE HERE
+  </div>
+</div>
+-->
+
+<!-- ════ FEATURED / TOP STORIES ════ -->
+<div id='featured'>
+  <div class='container'>
+    <div class='sec-head'><h2>✦ मुख्य बातम्या | Top Stories</h2><div class='sh-line'></div></div>
+    <div class='feat-wrap'>
+
+      <!-- Big Main Post -->
+      <b:loop values='data:posts' var='post' index='i'>
+        <b:if cond='data:i == 0'>
+          <div class='feat-main-card'>
+            <b:if cond='data:post.featuredImage'>
+              <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage.url,700,"1x")' loading='eager' onerror="this.src='https://via.placeholder.com/700x270/d62828/fff?text=फक्त+बातमी'"/>
+            <b:else/>
+              <img alt='फक्त बातमी' src='https://via.placeholder.com/700x270/d62828/fff?text=फक्त+बातमी'/>
+            </b:if>
+            <div class='feat-main-overlay'>
+              <b:loop values='data:post.labels' var='label' index='li'>
+                <b:if cond='data:li == 0'>
+                  <span class='feat-label'><data:label.name/></span>
+                </b:if>
+              </b:loop>
+              <div class='feat-main-title'><a expr:href='data:post.url' style='color:#fff'><data:post.title/></a></div>
+              <div class='feat-main-meta'>✍ <data:post.author.name/> &nbsp;|&nbsp; 🕐 <data:post.date.label/></div>
+            </div>
+          </div>
+        </b:if>
+      </b:loop>
+
+      <!-- Side list posts 2-5 -->
+      <div class='feat-list'>
+        <b:loop values='data:posts' var='post' index='i'>
+          <b:if cond='data:i &gt; 0 and data:i &lt; 5'>
+            <div class='feat-list-item'>
+              <b:if cond='data:post.featuredImage'>
+                <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage.url,90,"1x")' loading='lazy' onerror="this.src='https://via.placeholder.com/90x72/eee/aaa?text=FB'"/>
+              <b:else/>
+                <img alt='फक्त बातमी' src='https://via.placeholder.com/90x72/eee/aaa?text=FB'/>
+              </b:if>
+              <div class='feat-list-info'>
+                <b:loop values='data:post.labels' var='label' index='li'>
+                  <b:if cond='data:li == 0'>
+                    <div class='fli-cat'><data:label.name/></div>
+                  </b:if>
+                </b:loop>
+                <div class='fli-title'><a expr:href='data:post.url'><data:post.title/></a></div>
+                <div class='fli-meta'><data:post.date.label/></div>
+              </div>
+            </div>
+          </b:if>
+        </b:loop>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════ MAIN POSTS + SIDEBAR ════ -->
+<div id='main-body'>
+  <div class='container'>
+    <div class='body-grid'>
+
+      <!-- POSTS -->
+      <div id='posts-col'>
+        <div class='sec-head'><h2>📰 ताज्या बातम्या | Latest News</h2><div class='sh-line'></div></div>
+        <div class='posts-grid'>
+          <b:loop values='data:posts' var='post' index='i'>
+            <b:if cond='data:i &gt; 4'>
+              <div class='post-card'>
+                <a expr:href='data:post.url'>
+                  <b:if cond='data:post.featuredImage'>
+                    <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage.url,400,"1x")' loading='lazy' onerror="this.src='https://via.placeholder.com/400x130/f5f5f5/bbb?text=फक्त+बातमी'"/>
+                  <b:else/>
+                    <img alt='फक्त बातमी' src='https://via.placeholder.com/400x130/f5f5f5/bbb?text=फक्त+बातमी'/>
+                  </b:if>
+                </a>
+                <div class='post-card-body'>
+                  <b:loop values='data:post.labels' var='label' index='li'>
+                    <b:if cond='data:li == 0'>
+                      <div class='pc-cat'><a expr:href='data:label.url'><data:label.name/></a></div>
+                    </b:if>
+                  </b:loop>
+                  <div class='pc-title'><a expr:href='data:post.url'><data:post.title/></a></div>
+                  <div class='pc-meta'>✍ <data:post.author.name/> · <data:post.date.label/></div>
+                </div>
+              </div>
+            </b:if>
+          </b:loop>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class='blog-pager'>
+          <b:include name='nextprev'/>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside id='sidebar'>
+
+        <!-- Recent Posts -->
+        <div class='sidebar-block'>
+          <div class='sec-head'><h2>🔥 लोकप्रिय बातम्या</h2><div class='sh-line'></div></div>
+          <b:loop values='data:posts' var='post' index='i'>
+            <b:if cond='data:i &lt; 5'>
+              <div class='sp-item'>
+                <div class='sp-num'><data:i + 1/></div>
+                <div>
+                  <b:loop values='data:post.labels' var='label' index='li'>
+                    <b:if cond='data:li == 0'>
+                      <div class='sp-cat'><data:label.name/></div>
+                    </b:if>
+                  </b:loop>
+                  <div class='sp-title'><a expr:href='data:post.url'><data:post.title/></a></div>
+                  <div class='sp-meta'><data:post.date.label/></div>
+                </div>
+              </div>
+            </b:if>
+          </b:loop>
+        </div>
+
+        <!-- Ad Slot -->
+        <div class='sidebar-block'>
+          <div class='ad-slot'>
+            📢 Advertisement<br/>(300×250 – AdSense येथे)<br/><small>आपली जाहिरात द्यायची असल्यास संपर्क करा</small>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class='sidebar-block'>
+          <div class='sec-head'><h2>📂 विभाग</h2><div class='sh-line'></div></div>
+          <ul style='list-style:none;padding:0'>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/%E0%A4%9A%E0%A5%87%E0%A4%A4%E0%A4%A8%20%E0%A4%B2%E0%A5%82%E0%A4%A4%E0%A4%A1%E0%A5%87' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ चंद्रपूर <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Maharashtra' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ महाराष्ट्र <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Politics' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ राजकारण <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Crime' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ गुन्हेगारी <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Accident' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ अपघात <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Sports' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ क्रीडा <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Education' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ शिक्षण <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0;border-bottom:1px solid #f4f4f4'><a href='/search/label/Business' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ व्यवसाय <span style='color:#d62828'>→</span></a></li>
+            <li style='padding:7px 0'><a href='/search/label/World' style='color:#333;font-size:12px;display:flex;justify-content:space-between'>▸ जग <span style='color:#d62828'>→</span></a></li>
+          </ul>
+        </div>
+
+        <!-- WhatsApp Channel CTA -->
+        <div class='sidebar-block' style='background:#e8f8ef;border-color:#25d366'>
+          <div style='text-align:center'>
+            <div style='font-size:28px;margin-bottom:6px'>📲</div>
+            <div style='font-weight:bold;color:#1a1a1a;font-size:13px;margin-bottom:4px'>WhatsApp वर जॉईन करा</div>
+            <div style='font-size:11px;color:#555;margin-bottom:10px'>ताज्या बातम्या थेट WhatsApp वर मिळवा</div>
+            <!-- ✏️ UPDATE: Replace with your actual WhatsApp channel link -->
+            <a href='https://whatsapp.com/channel/faktbatmi' rel='noopener' style='display:inline-block;background:#25d366;color:#fff;padding:8px 18px;border-radius:4px;font-size:12px;font-weight:bold' target='_blank'>Join Channel</a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SOCIAL SHARE BAR ════ -->
+<div id='share-bar'>
+  <div class='container'>
+    <div class='sb-inner'>
+      <span class='sb-label'>शेअर करा:</span>
+      <a class='sh-btn sh-fb' expr:href='&quot;https://www.facebook.com/sharer/sharer.php?u=&quot; + data:blog.canonicalUrl' rel='noopener' target='_blank'>f Facebook</a>
+      <a class='sh-btn sh-wa' expr:href='&quot;https://api.whatsapp.com/send?text=&quot; + data:blog.title + &quot; - &quot; + data:blog.canonicalUrl' rel='noopener' target='_blank'>✓ WhatsApp</a>
+      <a class='sh-btn sh-tw' expr:href='&quot;https://twitter.com/intent/tweet?url=&quot; + data:blog.canonicalUrl + &quot;&amp;text=&quot; + data:blog.title' rel='noopener' target='_blank'>✕ Twitter</a>
+      <a class='sh-btn sh-tg' expr:href='&quot;https://t.me/share/url?url=&quot; + data:blog.canonicalUrl' rel='noopener' target='_blank'>✈ Telegram</a>
+      <a class='sh-btn sh-cp' href='#' id='fb-copy-btn' onclick='fbCopy(this);return false;'>⎘ Copy Link</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════ FOOTER ════ -->
+<div id='footer'>
+  <div class='container'>
+    <div class='footer-top'>
+      <div class='footer-grid'>
+
+        <div class='footer-col'>
+          <h3>फक्त बातमी बद्दल</h3>
+          <p>faktbatmi.com हे महाराष्ट्रातील ताज्या बातम्यांचे विश्वसनीय व्यासपीठ आहे. चंद्रपूर, महाराष्ट्र, भारत आणि जगभरातील बातम्या येथे मिळतात.</p>
+          <div style='margin-top:10px;display:flex;gap:8px'>
+            <a href='https://facebook.com/faktbatmi' rel='noopener' style='background:#1877f2;color:#fff;padding:5px 10px;border-radius:3px;font-size:11px;font-weight:bold' target='_blank'>Facebook</a>
+            <a href='https://t.me/faktbatmi' rel='noopener' style='background:#0088cc;color:#fff;padding:5px 10px;border-radius:3px;font-size:11px;font-weight:bold' target='_blank'>Telegram</a>
+          </div>
+        </div>
+
+        <div class='footer-col'>
+          <h3>महत्त्वाचे विभाग</h3>
+          <ul>
+            <li><a href='/search/label/Maharashtra'>▸ महाराष्ट्र</a></li>
+            <li><a href='/search/label/Politics'>▸ राजकारण</a></li>
+            <li><a href='/search/label/Crime'>▸ गुन्हेगारी</a></li>
+            <li><a href='/search/label/Accident'>▸ अपघात</a></li>
+            <li><a href='/search/label/Sports'>▸ क्रीडा</a></li>
+            <li><a href='/search/label/Education'>▸ शिक्षण</a></li>
+          </ul>
+        </div>
+
+        <div class='footer-col'>
+          <h3>उपयुक्त दुवे</h3>
+          <ul>
+            <li><a href='/p/about-us.html'>▸ आमच्याबद्दल</a></li>
+            <li><a href='/p/contact.html'>▸ संपर्क</a></li>
+            <li><a href='/p/privacy-policy.html'>▸ गोपनीयता धोरण</a></li>
+            <li><a href='/p/disclaimer.html'>▸ Disclaimer</a></li>
+            <li><a href='/sitemap.xml'>▸ Sitemap</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class='footer-bottom'>
+      <div class='footer-links'>
+        <a href='/p/about-us.html'>About</a>
+        <a href='/p/contact.html'>Contact</a>
+        <a href='/p/privacy-policy.html'>Privacy Policy</a>
+        <a href='/p/disclaimer.html'>Disclaimer</a>
+      </div>
+      © 2026 <strong>फक्त बातमी</strong> (faktbatmi.com) · सर्व हक्क राखीव · Designed for Blogger
+    </div>
+  </div>
+</div>
+
+<!-- ════ JAVASCRIPT ════ -->
+<script>//<![CDATA[
+(function(){
+  var mD=["रविवार","सोमवार","मंगळवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"];
+  var mM=["जानेवारी","फेब्रुवारी","मार्च","एप्रिल","मे","जून","जुलै","ऑगस्ट","सप्टेंबर","ऑक्टोबर","नोव्हेंबर","डिसेंबर"];
+  var eD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var eM=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  function mr(n){return String(n).replace(/[0-9]/g,function(d){return"०१२३४५६७८९"[+d]});}
+  function upd(){
+    var t=new Date(),d=t.getDate(),m=t.getMonth(),y=t.getFullYear(),w=t.getDay();
+    var fd=document.getElementById("fb-date"),ed=document.getElementById("en-date");
+    if(fd) fd.textContent=mD[w]+", "+mr(d)+" "+mM[m]+" "+mr(y);
+    if(ed) ed.textContent=eD[w]+", "+("0"+d).slice(-2)+" "+eM[m]+" "+y;
+  }
+  upd(); setInterval(upd,60000);
+  document.querySelectorAll("#nav ul li a").forEach(function(a){
+    var h=a.getAttribute("href");
+    if(h && h!="/" && window.location.href.indexOf(h)>-1) a.parentElement.classList.add("active");
+    if(h=="/" && window.location.pathname=="/") a.parentElement.classList.add("active");
+  });
+})();
+function fbCopy(el){
+  navigator.clipboard.writeText(window.location.href).then(function(){
+    el.textContent="Copied!";
+    setTimeout(function(){el.textContent="Copy Link";},2000);
+  });
+}
+//]]></script>
+
+</body>
+</html>
