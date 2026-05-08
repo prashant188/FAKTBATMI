@@ -381,48 +381,41 @@ const POSTS_PER_PAGE = 8;                        // Posts to show per page
 var allPosts = [];
 var currentPage = 1;
 
+// Use allorigins CORS proxy to fetch Blogger JSON feed
+var BLOGGER_FEED = 'https://faktbatmi.blogspot.com/feeds/posts/default';
+
 function getBloggerAPI(maxResults, startIndex, label) {
-  return new Promise(function(resolve, reject) {
-    var cbName = 'bc_' + Date.now() + '_' + Math.floor(Math.random()*9999);
-    var url = 'https://faktbatmi.blogspot.com/feeds/posts/default?alt=json-in-script&callback=' + cbName + '&max-results=' + maxResults;
-    if (startIndex) url += '&start-index=' + startIndex;
-    if (label) url += '&category=' + encodeURIComponent(label);
+  var feedUrl = BLOGGER_FEED + '?alt=json&max-results=' + maxResults;
+  if (startIndex) feedUrl += '&start-index=' + startIndex;
+  if (label) feedUrl += '&category=' + encodeURIComponent(label);
 
-    var timer = setTimeout(function() {
-      reject(new Error('Timeout - no response from Blogger'));
-      cleanup();
-    }, 10000);
+  // Use allorigins proxy to bypass CORS
+  var proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl);
 
-    function cleanup() {
-      delete window[cbName];
-      if (script && script.parentNode) script.parentNode.removeChild(script);
-      clearTimeout(timer);
-    }
-
-    window[cbName] = function(data) {
-      resolve(data);
-      cleanup();
-    };
-
-    var script = document.createElement('script');
-    script.src = url;
-    script.onerror = function() {
-      reject(new Error('Script load failed - check BLOG_URL: ' + BLOG_URL));
-      cleanup();
-    };
-    document.head.appendChild(script);
-  });
+  return fetch(proxyUrl)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Proxy error: ' + r.status);
+      return r.json();
+    })
+    .then(function(proxyData) {
+      // allorigins wraps response in {contents: "..."}
+      var parsed = JSON.parse(proxyData.contents);
+      return parsed;
+    });
 }
 
-// Fallback: direct fetch (works if CORS is enabled on Blogger)
+// Fallback using corsproxy.io
 function getBloggerAPIFetch(maxResults, startIndex, label) {
-  var url = 'https://faktbatmi.blogspot.com/feeds/posts/default?alt=json&max-results=' + maxResults;
-  if (startIndex) url += '&start-index=' + startIndex;
-  if (label) url += '&category=' + encodeURIComponent(label);
-  return fetch(url, {mode:'cors'}).then(function(r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  });
+  var feedUrl = BLOGGER_FEED + '?alt=json&max-results=' + maxResults;
+  if (startIndex) feedUrl += '&start-index=' + startIndex;
+  if (label) feedUrl += '&category=' + encodeURIComponent(label);
+
+  var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(feedUrl);
+  return fetch(proxyUrl)
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
 }
 
 function getImageFromPost(post) {
