@@ -21,7 +21,7 @@ img{max-width:100%;display:block;object-fit:cover}
 .soc a{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:3px;color:#fff;font-size:9px;font-weight:700;margin-left:4px}
 .soc .fb{background:#1877f2}.soc .wa{background:#25d366}.soc .tg{background:#0088cc}.soc .yt{background:#ff0000}
 #breaking{background:var(--red);display:flex;align-items:center;overflow:hidden;height:34px}
-#breaking .lbl{background:var(--red-dark);color:#fff;padding:0 16px;font-size:11px;font-weight:700;white-space:nowrap;height:100%;display:flex;align-items:center;border-right:2px solid rgba(255,255,255,0.3);flex-shrink:0}
+#breaking .lbl{background:var(--red-dark);color:#fff;padding:0 16px;font-size:11px;font-weight:700;white-space:nowrap;height:100%;display:flex;align-items:center;border-right:2px solid rgba(255,255,255,.15)}
 #breaking .track-wrap{overflow:hidden;flex:1}
 #breaking .track{display:inline-block;white-space:nowrap;font-size:12px;color:#fff;padding-left:30px;animation:scroll-ticker 40s linear infinite}
 @keyframes scroll-ticker{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
@@ -263,11 +263,9 @@ var POSTS_PER_PAGE = 10;
 var currentPage = 1;
 var currentLabel = '';
 
-// Get label from URL
 var urlParams = new URLSearchParams(window.location.search);
 currentLabel = urlParams.get('label') || '';
 
-// Label display names
 var labelNames = {
   'Chandrapur': 'चंद्रपूर',
   'Maharashtra': 'महाराष्ट्र',
@@ -282,30 +280,25 @@ var labelNames = {
 
 var displayName = labelNames[currentLabel] || currentLabel;
 
-// Update page title and headings
 document.title = displayName + ' बातम्या | फक्त बातमी';
 document.getElementById('cat-badge').textContent = displayName;
 document.getElementById('cat-title').textContent = displayName + ' बातम्या';
 document.getElementById('sec-title').textContent = displayName + ' बातम्या';
 
-// Highlight active nav
 document.querySelectorAll('#nav-list li a').forEach(function(a) {
   if (a.href.indexOf('label=' + currentLabel) > -1) a.parentElement.classList.add('active');
 });
 
-// Highlight active category in sidebar
 document.querySelectorAll('#cat-list li a').forEach(function(a) {
   if (a.href.indexOf('label=' + currentLabel) > -1) a.parentElement.classList.add('active');
 });
 
-// Update share links
 var pageUrl = window.location.href;
 document.getElementById('sh-fb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl);
 document.getElementById('sh-wa').href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(pageUrl);
 document.getElementById('sh-tw').href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(pageUrl);
 document.getElementById('sh-tg').href = 'https://t.me/share/url?url=' + encodeURIComponent(pageUrl);
 
-// Date display
 (function() {
   var mD=['रविवार','सोमवार','मंगळवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
   var mM=['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर'];
@@ -314,7 +307,6 @@ document.getElementById('sh-tg').href = 'https://t.me/share/url?url=' + encodeUR
   document.getElementById('date-display').textContent=mD[t.getDay()]+', '+mr(t.getDate())+' '+mM[t.getMonth()]+' '+mr(t.getFullYear());
 })();
 
-// Proxy fetch
 function tryProxy(feedUrl, proxies, index) {
   if (index >= proxies.length) return Promise.reject(new Error('All proxies failed'));
   var proxy = proxies[index];
@@ -351,7 +343,7 @@ function getBloggerAPI(maxResults, startIndex, label) {
 function getImage(post) {
   if (post.media && post.media.$t) return post.media.$t;
   var c = post.content ? post.content.$t : '';
-  var m = c.match(/<img[^>]+src="([^">]+)"/);
+  var m = c.match(/<img[^>]+src="([^"]+)"/);
   if (m) return m[1];
   return 'https://placehold.co/400x136/c8181e/fff?text=फक्त+बातमी';
 }
@@ -367,7 +359,7 @@ function formatDate(d) {
 }
 
 function getPostUrl(post) {
-  if (post.link) for (var i=0;i<post.link.length;i++) if (post.link[i].rel==='alternate') return post.link[i].href;
+  if (post.link) for (var i=0;i<post.link.length;i++) if (post.link[i].rel==='alternate') return 'post.html?url=' + encodeURIComponent(post.link[i].href);
   return '#';
 }
 
@@ -401,9 +393,9 @@ function renderPopular(posts) {
   var html='', max=Math.min(5,posts.length);
   for (var i=0;i<max;i++) {
     var p=posts[i], label=getLabel(p), url=getPostUrl(p);
-    html += '<div class="sp-item"><div class="sp-num">'+(i+1)+'</div><div>'+
+    html += '<div class="sp-item"><div class="sp-num">'+(i+1)+'</div><div>'+ 
       (label?'<div class="sp-cat">'+label+'</div>':'')+
-      '<div class="sp-title"><a href="'+url+'" target="_blank" rel="noopener">'+p.title.$t+'</a></div>'+
+      '<div class="sp-title"><a href="'+url+'" target="_blank" rel="noopener">'+p.title.$t+'</a></div>'+ 
       '<div class="sp-meta">'+formatDate(p.published.$t)+'</div></div></div>';
   }
   document.getElementById('popular-posts').innerHTML = html;
@@ -442,7 +434,6 @@ function copyLink() {
   });
 }
 
-// Load posts for this category
 getBloggerAPI(POSTS_PER_PAGE, 1, currentLabel).then(function(data) {
   var posts = data.feed ? (data.feed.entry || []) : [];
   renderNewsGrid(posts);
