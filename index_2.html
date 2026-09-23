@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>फक्त बातमी | Marathi News - faktbatmi.com</title>
+<meta name="description" content="फक्त बातमी - महाराष्ट्रातील ताज्या बातम्या"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --red:#C8181E;--red-dark:#8B0000;--red-glow:rgba(200,24,30,.12);
+  --ink:#0D0D0D;--ink2:#1C1C1E;--smoke:#F6F5F3;--paper:#fff;
+  --border:#E8E5DF;--muted:#8A8A8E;--radius:8px;
+  --shadow:0 2px 16px rgba(0,0,0,.08);--shadow-h:0 8px 40px rgba(0,0,0,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans','Noto Sans Devanagari',sans-serif;background:var(--smoke);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block;object-fit:cover}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* TOPBAR */
+#topbar{background:#ffffff;padding:7px 0;border-bottom:1px solid var(--border)}
+.tb{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.tb-date{font-size:10px;color:#333;font-family:'Noto Sans Devanagari',sans-serif}
+.tb-right{display:flex;align-items:center}
+.tb-right a{color:#444;font-size:10px;margin-left:12px;transition:color .2s}
+.tb-right a:hover{color:var(--red)}
+.soc a{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;color:#fff;font-size:10px;font-weight:700;margin-left:4px;transition:transform .2s,opacity .2s}
+.soc a:hover{transform:translateY(-1px);opacity:.85}
+.s-fb{background:#1877f2}.s-wa{background:#25d366}.s-tg{background:#0088cc}.s-yt{background:#ff0000}
+
+/* TICKER */
+#ticker{background:#ffffff;display:flex;height:36px;overflow:hidden;align-items:center;border-bottom:2px solid var(--red)}
+.tk-lbl{background:var(--red);color:#fff;padding:0 20px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;height:100%;display:flex;align-items:center;gap:8px;flex-shrink:0;border-right:1px solid rgba(200,24,30,.2)}
+.tk-lbl::before{content:'';width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.tk-scroll{overflow:hidden;flex:1}
+.tk-track{display:inline-block;white-space:nowrap;animation:marquee 50s linear infinite;font-size:12px;color:var(--red);padding-left:40px;font-weight:600}
+@keyframes marquee{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+
+/* HEADER */
+#header{background:var(--paper);border-bottom:1px solid var(--border)}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:16px 0 14px;gap:16px;flex-wrap:wrap}
+.logo-name{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--ink);line-height:1;letter-spacing:-2px}
+.logo-name em{color:var(--red);font-style:normal}
+.logo-sub{font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:4px}
+.logo-sub b{color:var(--red)}
+.hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.date-tag{display:inline-flex;align-items:center;gap:5px;background:var(--smoke);border:1px solid var(--border);padding:5px 12px;border-radius:20px;font-size:10px;color:var(--muted);font-family:'Noto Sans Devanagari',sans-serif}
+#srch{display:flex;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+#srch:focus-within{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+#srch input{border:none;outline:none;padding:9px 14px;font-size:12px;width:220px;background:transparent;font-family:inherit;color:var(--ink)}
+#srch button{background:var(--red);border:none;color:#fff;padding:9px 18px;cursor:pointer;font-size:15px;font-weight:700;transition:background .2s}
+#srch button:hover{background:var(--red-dark)}
+
+/* ═══ NAVIGATION WITH DROPDOWN ═══ */
+#nav{background:var(--ink2);position:sticky;top:0;z-index:999;box-shadow:0 4px 24px rgba(0,0,0,.35)}
+.nav-inner{display:flex;align-items:stretch;justify-content:space-between}
+#nav ul{list-style:none;display:flex;flex-wrap:wrap;align-items:stretch}
+#nav li{position:relative}
+#nav li a, #nav li .nav-btn{display:flex;align-items:center;gap:5px;padding:13px 13px;color:#aaa;font-size:10.5px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;transition:color .2s,background .2s;white-space:nowrap;cursor:pointer;background:none;border:none;font-family:inherit}
+#nav li a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transition:transform .25s;transform-origin:center}
+#nav li a:hover,#nav li.active a{color:#fff}
+#nav li a:hover::after,#nav li.active a::after{transform:scaleX(1)}
+#nav li.active a{color:#fff}
+
+/* City dropdown */
+.has-drop{position:relative}
+.nav-btn{color:#aaa!important;position:relative}
+.nav-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transition:transform .25s;transform-origin:center}
+.has-drop:hover .nav-btn{color:#fff!important;background:rgba(255,255,255,.06)}
+.has-drop:hover .nav-btn::after{transform:scaleX(1)}
+.drop-arrow{font-size:8px;transition:transform .25s;display:inline-block;margin-left:2px}
+.has-drop:hover .drop-arrow{transform:rotate(180deg)}
+.dropdown{position:absolute;top:100%;left:0;background:var(--paper);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:0 0 8px 8px;min-width:180px;box-shadow:0 12px 40px rgba(0,0,0,.18);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility .2s;z-index:1000}
+.has-drop:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{display:flex;align-items:center;gap:10px;padding:11px 16px;font-size:12px;color:var(--ink);font-weight:600;text-transform:none;letter-spacing:0;transition:background .15s,color .15s;border-bottom:1px solid var(--border)}
+.dropdown a:last-child{border-bottom:none}
+.dropdown a:hover{background:var(--red);color:#fff!important}
+.dropdown a .city-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;transition:background .15s}.dropdown a:hover .city-dot{background:#fff}
+.nav-brand{color:#333;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:0 20px;display:flex;align-items:center}
+
+/* MOBILE NAV TOGGLE */
+.mob-menu-btn{display:none;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:8px;margin-left:auto}
+#mob-nav{display:none;background:var(--ink2);padding:8px 0;border-top:1px solid #333}
+#mob-nav a{display:block;padding:11px 20px;color:#aaa;font-size:12px;font-weight:600;border-bottom:1px solid #222;transition:color .2s,background .2s}
+#mob-nav a:hover{color:#fff;background:rgba(255,255,255,.05)}
+#mob-nav .mob-city-head{padding:10px 20px 6px;font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase}
+
+/* SECTION HEADING */
+.sh{display:flex;align-items:center;margin-bottom:20px}
+.sh h2{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);padding-right:16px;white-space:nowrap}
+.sh h2 span{color:var(--red)}
+.sh-line{flex:1;height:1px;background:linear-gradient(to right,var(--red),var(--border) 40%,transparent)}
+
+/* HERO */
+#hero{background:var(--paper);padding:24px 0;border-bottom:1px solid var(--border)}
+.hero-wrap{display:grid;grid-template-columns:1.8fr 1fr;gap:3px;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--border)}
+.hero-main{position:relative;min-height:400px;background:var(--ink);overflow:hidden}
+.hero-main a{display:block;height:100%}
+.hero-main img{width:100%;height:400px;opacity:.82;transition:opacity .5s,transform .6s}
+.hero-main:hover img{opacity:.95;transform:scale(1.04)}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.97) 100%);padding:24px;display:flex;flex-direction:column;justify-content:flex-end}
+.h-cat{display:inline-flex;align-items:center;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:2px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+.h-title{font-family:'Noto Sans Devanagari',sans-serif;font-size:20px;font-weight:800;color:#fff;line-height:1.45;margin-bottom:10px;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.h-meta{display:flex;align-items:center;gap:10px;font-size:10px;color:rgba(255,255,255,.55)}
+.h-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.4)}
+.hero-side{display:grid;grid-template-rows:repeat(4,1fr);gap:3px}
+.hs-card{background:var(--paper);overflow:hidden;transition:background .2s}
+.hs-card:hover{background:var(--smoke)}
+.hs-card a{display:flex;height:100%}
+.hs-thumb{width:106px;flex-shrink:0;overflow:hidden}
+.hs-thumb img{width:100%;height:100%;transition:transform .4s}
+.hs-card:hover .hs-thumb img{transform:scale(1.06)}
+.hs-info{padding:12px 14px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1}
+.hs-cat{font-size:9px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:.8px}
+.hs-title{font-family:'Noto Sans Devanagari',sans-serif;font-size:12.5px;font-weight:700;line-height:1.45;color:var(--ink)}
+.hs-date{font-size:9px;color:var(--muted)}
+
+/* MAIN LAYOUT */
+#main{padding:28px 0}
+.main-cols{display:grid;grid-template-columns:1fr 308px;gap:28px;align-items:start}
+
+/* CARDS */
+.top3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.t3card{background:var(--paper);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);display:flex;flex-direction:column;transition:box-shadow .25s,transform .25s}
+.t3card:hover{box-shadow:var(--shadow-h);transform:translateY(-4px)}
+.t3img{position:relative;overflow:hidden}
+.t3img img{width:100%;height:152px;transition:transform .45s}
+.t3card:hover .t3img img{transform:scale(1.07)}
+.t3pill{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:8.5px;font-weight:700;padding:3px 9px;border-radius:2px;letter-spacing:.8px;text-transform:uppercase}
+.t3body{padding:14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.t3title{font-family:'Noto Sans Devanagari',sans-serif;font-size:13px;font-weight:700;line-height:1.5;color:var(--ink);flex:1}
+.t3meta{font-size:10px;color:var(--muted)}
+.t3ex{font-size:11px;color:#666;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* LIST */
+.post-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--paper);margin-bottom:24px}
+.pl-item{border-bottom:1px solid var(--border);overflow:hidden;transition:background .2s}
+.pl-item:last-child{border-bottom:none}
+.pl-item:hover{background:var(--smoke)}
+.pl-item a{display:flex}
+.pl-thumb{width:106px;height:80px;flex-shrink:0;overflow:hidden}
+.pl-thumb img{width:100%;height:100%;transition:transform .4s}
+.pl-item:hover .pl-thumb img{transform:scale(1.06)}
+.pl-body{padding:12px 16px;display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1}
+.pl-cat{font-size:9px;color:var(--red);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.pl-title{font-family:'Noto Sans Devanagari',sans-serif;font-size:13px;font-weight:700;line-height:1.45;color:var(--ink)}
+.pl-meta{font-size:10px;color:var(--muted)}
+
+/* LOADING */
+.ldg{display:flex;align-items:center;justify-content:center;padding:60px 20px;gap:8px}
+.ldot{width:10px;height:10px;border-radius:50%;background:var(--red);animation:ldot 1.1s ease-in-out infinite}
+.ldot:nth-child(2){animation-delay:.18s}.ldot:nth-child(3){animation-delay:.36s}
+@keyframes ldot{0%,80%,100%{transform:scale(.3);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+/* PAGINATION */
+.pager{display:flex;align-items:center;gap:10px}
+.pager button{padding:9px 24px;border:1.5px solid var(--border);background:var(--paper);color:var(--ink);border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.pager button:hover:not(:disabled){background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-1px)}
+.pager button:disabled{opacity:.3;cursor:not-allowed}
+.pg-info{flex:1;text-align:center;font-size:12px;color:var(--muted)}
+
+/* SIDEBAR */
+.sb-widget{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px}
+.sw-head{padding:14px 18px 12px;border-bottom:1px solid var(--border)}
+.sw-head h3{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink)}
+.sw-body{padding:12px 18px}
+.rank-item{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.rank-item:last-child{border-bottom:none;padding-bottom:0}
+.rk-n{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--border);line-height:1;min-width:26px;flex-shrink:0;transition:color .2s}
+.rank-item:hover .rk-n{color:var(--red)}
+.rk-cat{font-size:9px;color:var(--red);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
+.rk-title{font-size:12px;font-weight:600;line-height:1.45;color:var(--ink);font-family:'Noto Sans Devanagari',sans-serif}
+.rk-date{font-size:9px;color:var(--muted);margin-top:3px}
+.cat-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px 18px}
+.cm-pill{display:block;padding:9px 12px;background:var(--smoke);border:1px solid var(--border);border-radius:6px;font-size:11.5px;font-weight:600;color:var(--ink);text-align:center;transition:all .2s}
+.cm-pill:hover{background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-1px)}
+.wa-box{background:linear-gradient(135deg,#064e3b,#065f46);padding:20px 18px;text-align:center}
+.wa-box .wi{font-size:36px;margin-bottom:8px}
+.wa-box h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:5px;font-family:'Noto Sans Devanagari',sans-serif}
+.wa-box p{font-size:11px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6}
+.wa-box a{display:inline-block;background:#22c55e;color:#fff;padding:10px 24px;border-radius:6px;font-size:12px;font-weight:700;transition:background .2s}
+.wa-box a:hover{background:#16a34a}
+.ad-wrap{padding:16px 18px}
+.ad-slot{background:var(--smoke);border:1.5px dashed var(--border);border-radius:6px;padding:22px;text-align:center;font-size:10px;color:#bbb}
+
+/* SHARE BAR */
+#sharebar{background:var(--paper);border-top:2px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0}
+.shr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.shr-lbl{font-size:11px;font-weight:600;color:var(--muted);margin-right:4px}
+.shbtn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:6px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:opacity .2s,transform .2s}
+.shbtn:hover{opacity:.85;transform:translateY(-1px)}
+.s-fb2{background:#1877f2}.s-wa2{background:#25d366}.s-tw{background:#111}.s-tg2{background:#0088cc}.s-cp{background:#555}
+
+/* FOOTER */
+#footer{background:var(--ink);color:#555}
+.ft-stripe{height:4px;background:linear-gradient(to right,var(--red),#ff6b6b,var(--red))}
+.ft-main{padding:36px 0 28px}
+.ft-cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px}
+.ftc-logo{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:#fff;margin-bottom:6px}
+.ftc-logo em{color:var(--red);font-style:normal}
+.ftc-tag{font-size:9px;color:#444;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+.ftc-desc{font-size:12px;color:#555;line-height:1.8;margin-bottom:16px}
+.ft-soc{display:flex;gap:8px}
+.ft-soc a{padding:6px 14px;border-radius:4px;font-size:11px;font-weight:700;color:#fff;transition:opacity .2s}
+.ft-soc a:hover{opacity:.8}
+.ft-col h4{color:#fff;font-size:11px;font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #1e1e1e;letter-spacing:.8px;text-transform:uppercase}
+.ft-col ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:9px}
+.ft-col ul li a{font-size:12px;color:#555;transition:color .2s}
+.ft-col ul li a:hover{color:var(--red)}
+.ft-bot{background:#080808;padding:14px 0}
+.fb-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.fb-copy{font-size:11px;color:#444}
+.fb-copy strong{color:#777}
+.fb-links{display:flex;gap:16px;flex-wrap:wrap}
+.fb-links a{font-size:11px;color:#444;transition:color .2s}
+.fb-links a:hover{color:var(--red)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fadeUp .45s ease both}
+.anim:nth-child(2){animation-delay:.08s}.anim:nth-child(3){animation-delay:.16s}
+.anim:nth-child(4){animation-delay:.24s}.anim:nth-child(5){animation-delay:.32s}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:960px){
+  .hero-wrap,.main-cols,.ft-cols{grid-template-columns:1fr}
+  .top3{grid-template-columns:repeat(2,1fr)}
+  .hero-side{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
+  .hero-main img{height:280px}
+  .logo-name{font-size:34px}
+  #srch input{width:160px}
+  .nav-brand{display:none}
+  .dropdown{left:auto;right:0}
+}
+@media(max-width:768px){
+  /* Hide desktop nav, show mobile */
+  #nav .nav-inner > ul{display:none}
+  .mob-menu-btn{display:flex;align-items:center;justify-content:center}
+  .nav-brand{display:none}
+  #mob-nav.open{display:block}
+  .top3{grid-template-columns:1fr}
+  .hero-side{grid-template-columns:1fr}
+  .logo-name{font-size:28px}
+  #srch input{width:130px}
+  .ft-cols{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .logo-name{font-size:24px}
+  #srch{display:none}
+  .hdr-right{gap:6px}
+}
+
+/* ══ SLIDER ══ */
+#slider-section{background:var(--paper);border-bottom:1px solid var(--border);padding:0}
+.slider-wrap{position:relative;overflow:hidden;border-radius:0;background:var(--ink2)}
+.slider-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);height:220px}
+.slide{min-width:100%;position:relative;flex-shrink:0;overflow:hidden;cursor:pointer}
+.slide img{width:100%;height:220px;object-fit:cover;transition:transform .6s}
+.slide:hover img{transform:scale(1.03)}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.6) 0%,rgba(0,0,0,.1) 60%,transparent 100%);display:flex;align-items:center;padding:0 40px}
+.slide-content{color:#fff;max-width:60%}
+.slide-badge{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.slide-title{font-family:'Noto Sans Devanagari',sans-serif;font-size:20px;font-weight:800;line-height:1.45;text-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:8px}
+.slide-meta{font-size:11px;color:rgba(255,255,255,.65)}
+/* Prev/Next arrows */
+.sl-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;transition:background .2s;backdrop-filter:blur(4px)}
+.sl-arrow:hover{background:var(--red)}
+.sl-prev{left:14px}
+.sl-next{right:14px}
+/* Dots */
+.sl-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10}
+.sl-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);border:none;cursor:pointer;transition:all .3s;padding:0}
+.sl-dot.active{background:#fff;width:24px;border-radius:4px}
+/* Ad slides */
+.slide-ad-label{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.5);color:#fff;font-size:9px;padding:2px 8px;border-radius:3px;letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar"><div class="wrap"><div class="tb">
+  <span class="tb-date" id="date-mr">&#128197; ...</span>
+  <div class="tb-right">
+    <div class="soc">
+      <a class="s-fb" href="https://facebook.com/faktbatmi" target="_blank" rel="noopener">f</a>
+      <a class="s-wa" href="https://whatsapp.com/channel/faktbatmi" target="_blank" rel="noopener">W</a>
+      <a class="s-tg" href="https://t.me/faktbatmi" target="_blank" rel="noopener">T</a>
+      <a class="s-yt" href="https://youtube.com/@faktbatmi" target="_blank" rel="noopener">Y</a>
+    </div>
+    <a href="about.html">आमच्याबद्दल</a>
+    <a href="contact.html">संपर्क</a>
+  </div>
+</div></div></div>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="tk-lbl">Breaking</div>
+  <div class="tk-scroll"><span class="tk-track" id="ticker-text">बातम्या लोड होत आहेत...</span></div>
+</div>
+
+<!-- HEADER -->
+<div id="header"><div class="wrap"><div class="hdr">
+  <a href="index.html">
+    <div class="logo-name">फक्त <em>बातमी</em></div>
+    <div class="logo-sub">faktbatmi.com &#183; <b>महाराष्ट्र</b> &#183; भारत &#183; जग</div>
+  </a>
+  <div class="hdr-right">
+    <div class="date-tag" id="date-en">&#128197; ...</div>
+    <div id="srch">
+      <input type="text" id="search-input" placeholder="&#128269; बातमी शोधा..."/>
+      <button onclick="doSearch()">&#8594;</button>
+    </div>
+  </div>
+</div></div></div>
+
+<!-- NAV — DESKTOP -->
+<nav id="nav"><div class="wrap"><div class="nav-inner">
+  <ul id="nav-list">
+    <li class="active"><a href="index.html">&#127968; Home</a></li>
+
+    <!-- CITY DROPDOWN -->
+    <li class="has-drop">
+      <button class="nav-btn">&#127961; City <span class="drop-arrow">&#9660;</span></button>
+      <div class="dropdown">
+        <a href="category.html?label=Mumbai"><span class="city-dot"></span>Mumbai - मुंबई</a>
+        <a href="category.html?label=Pune"><span class="city-dot"></span>Pune - पुणे</a>
+        <a href="category.html?label=Nagpur"><span class="city-dot"></span>Nagpur - नागपूर</a>
+        <a href="category.html?label=Chandrapur"><span class="city-dot"></span>Chandrapur - चंद्रपूर</a>
+        <a href="category.html?label=Yavatmal"><span class="city-dot"></span>Yavatmal - यवतमाळ</a>
+        <a href="category.html?label=Wardha"><span class="city-dot"></span>Wardha - वर्धा</a>
+        <a href="category.html?label=Gadchiroli"><span class="city-dot"></span>Gadchiroli - गडचिरोली</a>
+      </div>
+    </li>
+
+    <li><a href="category.html?label=Maharashtra">महाराष्ट्र</a></li>
+    <li><a href="category.html?label=Politics">राजकारण</a></li>
+    <li><a href="category.html?label=Crime">गुन्हेगारी</a></li>
+    <li><a href="category.html?label=Accident">अपघात</a></li>
+    <li><a href="category.html?label=Sports">क्रीडा</a></li>
+    <li><a href="category.html?label=Education">शिक्षण</a></li>
+    <li><a href="category.html?label=Business">व्यवसाय</a></li>
+    <li><a href="category.html?label=World">जग</a></li>
+  </ul>
+  <span class="nav-brand">फक्त बातमी</span>
+  <!-- MOBILE HAMBURGER -->
+  <button class="mob-menu-btn" onclick="toggleMobNav()" id="mob-btn">&#9776;</button>
+</div></div></nav>
+
+<!-- MOBILE NAV -->
+<div id="mob-nav">
+  <a href="index.html">&#127968; मुख्यपृष्ठ / Home</a>
+  <div class="mob-city-head">&#127961; City</div>
+  <a href="category.html?label=Mumbai" style="padding-left:32px">&#8227; Mumbai - मुंबई</a>
+  <a href="category.html?label=Pune" style="padding-left:32px">&#8227; Pune - पुणे</a>
+  <a href="category.html?label=Nagpur" style="padding-left:32px">&#8227; Nagpur - नागपूर</a>
+  <a href="category.html?label=Chandrapur" style="padding-left:32px">&#8227; Chandrapur - चंद्रपूर</a>
+  <a href="category.html?label=Yavatmal" style="padding-left:32px">&#8227; Yavatmal - यवतमाळ</a>
+  <a href="category.html?label=Wardha" style="padding-left:32px">&#8227; Wardha - वर्धा</a>
+  <a href="category.html?label=Gadchiroli" style="padding-left:32px">&#8227; Gadchiroli - गडचिरोली</a>
+  <a href="category.html?label=Maharashtra">महाराष्ट्र</a>
+  <a href="category.html?label=Politics">राजकारण</a>
+  <a href="category.html?label=Crime">गुन्हेगारी</a>
+  <a href="category.html?label=Accident">अपघात</a>
+  <a href="category.html?label=Sports">क्रीडा</a>
+  <a href="category.html?label=Education">शिक्षण</a>
+  <a href="category.html?label=Business">व्यवसाय</a>
+  <a href="category.html?label=World">जग</a>
+</div>
+
+
+<!-- SLIDER -->
+<div id="slider-section">
+  <div class="slider-wrap">
+    <div class="slider-track" id="slider-track">
+
+      <!-- SLIDE 1: फक्त बातमी branding slide -->
+      <div class="slide" id="slide-0" onclick="window.location.href='index.html'" style="background:linear-gradient(135deg,#C8181E 0%,#8B0000 100%)">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 60px;gap:40px">
+          <div style="flex:1">
+            <div class="slide-badge" style="margin-bottom:14px">&#128308; LIVE NEWS</div>
+            <div class="slide-title" style="font-size:28px">फक्त बातमी</div>
+            <div class="slide-title" style="font-size:16px;font-weight:600;margin-top:6px;opacity:.9">महाराष्ट्राच्या ताज्या बातम्या</div>
+            <div class="slide-meta" style="margin-top:10px">faktbatmi.com &#183; Marathi News &#183; Since 2020</div>
+          </div>
+          <div style="text-align:right;opacity:.15;font-family:'Playfair Display',serif;font-size:90px;font-weight:900;color:#fff;line-height:1;user-select:none">FB</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Ad slot 1 - image auto-loads from Blogger label "Slider" -->
+      <div class="slide" id="slide-1" style="background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5e 100%)">
+        <img id="slide1-img" src="" alt="Advertisement" style="display:none;width:100%;height:220px;object-fit:cover"/>
+        <div id="slide1-placeholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px">
+          <div style="font-size:32px">&#128226;</div>
+          <div style="color:#fff;font-size:16px;font-weight:700;letter-spacing:1px">YOUR AD HERE</div>
+          <div style="color:rgba(255,255,255,.5);font-size:12px">Blogger मध्ये "Slider" label लावा</div>
+        </div>
+        <div class="slide-ad-label">ADVERTISEMENT</div>
+      </div>
+
+      <!-- SLIDE 3: Ad slot 2 -->
+      <div class="slide" id="slide-2" style="background:linear-gradient(135deg,#0d4f3c 0%,#1a7a5e 100%)">
+        <img id="slide2-img" src="" alt="Advertisement" style="display:none;width:100%;height:220px;object-fit:cover"/>
+        <div id="slide2-placeholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px">
+          <div style="font-size:32px">&#128226;</div>
+          <div style="color:#fff;font-size:16px;font-weight:700;letter-spacing:1px">YOUR AD HERE</div>
+          <div style="color:rgba(255,255,255,.5);font-size:12px">Blogger मध्ये "Slider" label लावा</div>
+        </div>
+        <div class="slide-ad-label">ADVERTISEMENT</div>
+      </div>
+
+    </div>
+
+    <!-- Arrows -->
+    <button class="sl-arrow sl-prev" onclick="sliderMove(-1)">&#8249;</button>
+    <button class="sl-arrow sl-next" onclick="sliderMove(1)">&#8250;</button>
+
+    <!-- Dots -->
+    <div class="sl-dots">
+      <button class="sl-dot active" onclick="sliderGo(0)"></button>
+      <button class="sl-dot" onclick="sliderGo(1)"></button>
+      <button class="sl-dot" onclick="sliderGo(2)"></button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="hero"><div class="wrap">
+  <div class="sh" style="margin-bottom:16px"><h2><span>&#10022;</span> मुख्य बातम्या</h2><div class="sh-line"></div></div>
+  <div class="hero-wrap">
+    <div class="hero-main" id="feat-main"><div class="ldg"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
+    <div class="hero-side" id="feat-side"></div>
+  </div>
+</div></div>
+
+<!-- MAIN -->
+<div id="main"><div class="wrap"><div class="main-cols">
+  <div>
+    <div class="sh"><h2><span>&#128240;</span> ताज्या बातम्या</h2><div class="sh-line"></div></div>
+    <div class="top3" id="news-grid"><div class="ldg" style="grid-column:1/-1"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
+    <div class="post-list" id="post-list"></div>
+    <div class="pager">
+      <button id="btn-prev" onclick="changePage(-1)" disabled>&#8592; मागे</button>
+      <span class="pg-info" id="page-info">पृष्ठ 1</span>
+      <button id="btn-next" onclick="changePage(1)">पुढे &#8594;</button>
+    </div>
+  </div>
+  <aside>
+    <div class="sb-widget">
+      <div class="sw-head"><h3>&#128293; लोकप्रिय</h3></div>
+      <div class="sw-body" id="popular-posts"><div class="ldg"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div></div>
+    </div>
+    <div class="sb-widget"><div class="ad-wrap"><div class="ad-slot">&#128226; Advertisement 300&#215;250</div></div></div>
+    <div class="sb-widget">
+      <div class="sw-head"><h3>&#127961; शहरे</h3></div>
+      <div class="cat-mosaic">
+        <a class="cm-pill" href="category.html?label=Mumbai">मुंबई</a>
+        <a class="cm-pill" href="category.html?label=Pune">पुणे</a>
+        <a class="cm-pill" href="category.html?label=Nagpur">नागपूर</a>
+        <a class="cm-pill" href="category.html?label=Chandrapur">चंद्रपूर</a>
+        <a class="cm-pill" href="category.html?label=Yavatmal">यवतमाळ</a>
+        <a class="cm-pill" href="category.html?label=Wardha">वर्धा</a>
+        <a class="cm-pill" href="category.html?label=Gadchiroli">गडचिरोली</a>
+        <a class="cm-pill" href="category.html?label=Maharashtra">महाराष्ट्र</a>
+      </div>
+    </div>
+    <div class="sb-widget">
+      <div class="sw-head"><h3>&#128194; विभाग</h3></div>
+      <div class="cat-mosaic">
+        <a class="cm-pill" href="category.html?label=Politics">राजकारण</a>
+        <a class="cm-pill" href="category.html?label=Crime">गुन्हेगारी</a>
+        <a class="cm-pill" href="category.html?label=Sports">क्रीडा</a>
+        <a class="cm-pill" href="category.html?label=Education">शिक्षण</a>
+        <a class="cm-pill" href="category.html?label=Business">व्यवसाय</a>
+        <a class="cm-pill" href="category.html?label=World">जग</a>
+      </div>
+    </div>
+    <div class="sb-widget">
+      <div class="wa-box">
+        <div class="wi">&#128242;</div>
+        <h4>WhatsApp Channel</h4>
+        <p>ताज्या बातम्या थेट WhatsApp वर मिळवा!</p>
+        <a href="https://whatsapp.com/channel/faktbatmi" target="_blank" rel="noopener">Join Now &#8599;</a>
+      </div>
+    </div>
+  </aside>
+</div></div></div>
+
+<!-- SHARE BAR -->
+<div id="sharebar"><div class="wrap"><div class="shr">
+  <span class="shr-lbl">शेअर करा:</span>
+  <a class="shbtn s-fb2" href="https://www.facebook.com/sharer/sharer.php?u=https://faktbatmi.com" target="_blank" rel="noopener">f Facebook</a>
+  <a class="shbtn s-wa2" href="https://api.whatsapp.com/send?text=https://faktbatmi.com" target="_blank" rel="noopener">&#10003; WhatsApp</a>
+  <a class="shbtn s-tw" href="https://twitter.com/intent/tweet?url=https://faktbatmi.com" target="_blank" rel="noopener">&#10005; Twitter</a>
+  <a class="shbtn s-tg2" href="https://t.me/share/url?url=https://faktbatmi.com" target="_blank" rel="noopener">&#9992; Telegram</a>
+  <button class="shbtn s-cp" id="copy-btn" onclick="copyLink()">&#9135; Copy</button>
+</div></div></div>
+
+<!-- FOOTER -->
+<div id="footer">
+  <div class="ft-stripe"></div>
+  <div class="ft-main"><div class="wrap"><div class="ft-cols">
+    <div class="ft-col">
+      <div class="ftc-logo">फक्त <em>बातमी</em></div>
+      <div class="ftc-tag">Marathi News &#183; faktbatmi.com</div>
+      <p class="ftc-desc">महाराष्ट्रातील ताज्या बातम्यांचे विश्वसनीय व्यासपीठ. मुंबई, पुणे, नागपूर, चंद्रपूर सह संपूर्ण महाराष्ट्राच्या बातम्या. चेतन लूतडे यांच्याद्वारे संपादित.</p>
+      <div class="ft-soc">
+        <a href="https://facebook.com/faktbatmi" style="background:#1877f2" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://t.me/faktbatmi" style="background:#0088cc" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://youtube.com/@faktbatmi" style="background:#ff0000" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <div class="ft-col"><h4>शहरे</h4><ul>
+      <li><a href="category.html?label=Mumbai">&#9658; मुंबई</a></li>
+      <li><a href="category.html?label=Pune">&#9658; पुणे</a></li>
+      <li><a href="category.html?label=Nagpur">&#9658; नागपूर</a></li>
+      <li><a href="category.html?label=Chandrapur">&#9658; चंद्रपूर</a></li>
+      <li><a href="category.html?label=Yavatmal">&#9658; यवतमाळ</a></li>
+      <li><a href="category.html?label=Wardha">&#9658; वर्धा</a></li>
+      <li><a href="category.html?label=Gadchiroli">&#9658; गडचिरोली</a></li>
+    </ul></div>
+    <div class="ft-col"><h4>Links</h4><ul>
+      <li><a href="about.html">&#9658; आमच्याबद्दल</a></li>
+      <li><a href="contact.html">&#9658; संपर्क</a></li>
+      <li><a href="privacy.html">&#9658; Privacy Policy</a></li>
+      <li><a href="disclaimer.html">&#9658; Disclaimer</a></li>
+      <li><a href="https://faktbatmi.blogspot.com" target="_blank" rel="noopener">&#9658; Blogger Admin</a></li>
+    </ul></div>
+  </div></div></div>
+  <div class="ft-bot"><div class="wrap"><div class="fb-row">
+    <span class="fb-copy">&#169; 2026 <strong>फक्त बातमी</strong> (faktbatmi.com) &#183; सर्व हक्क राखीव</span>
+    <div class="fb-links"><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="contact.html">Contact</a></div>
+  </div></div></div>
+</div>
+
+<script>
+var BLOGGER_FEED='https://www.blogger.com/feeds/8273853599882633384/posts/default';
+var POSTS_PER_PAGE=8,currentPage=1,allPosts=[];
+
+// DATE
+(function(){
+  var mD=['रविवार','सोमवार','मंगळवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+  var mM=['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर'];
+  var eM=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var eD=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var t=new Date();
+  function mr(n){return String(n).replace(/[0-9]/g,function(d){return'०१२३४५६७८९'[+d]});}
+  var e1=document.getElementById('date-mr');if(e1)e1.innerHTML='&#128197; '+mD[t.getDay()]+', '+mr(t.getDate())+' '+mM[t.getMonth()]+' '+mr(t.getFullYear());
+  var e2=document.getElementById('date-en');if(e2)e2.innerHTML='&#128197; '+eD[t.getDay()]+', '+t.getDate()+' '+eM[t.getMonth()]+' '+t.getFullYear();
+})();
+
+// MOBILE NAV TOGGLE
+function toggleMobNav(){
+  var mn=document.getElementById('mob-nav');
+  var mb=document.getElementById('mob-btn');
+  mn.classList.toggle('open');
+  mb.innerHTML=mn.classList.contains('open')?'&#10005;':'&#9776;';
+}
+
+// PROXY
+function tryProxy(url,px,i){
+  if(i>=px.length)return Promise.reject(new Error('All proxies failed'));
+  var p=px[i];
+  if(p==='jsonp'){return new Promise(function(res,rej){var cb='bc'+Date.now();var u=url.replace('alt=json','alt=json-in-script')+'&callback='+cb;var tm=setTimeout(function(){rej(new Error('t/o'));delete window[cb];if(s.parentNode)s.parentNode.removeChild(s);},8000);window[cb]=function(d){clearTimeout(tm);res(d);delete window[cb];if(s.parentNode)s.parentNode.removeChild(s);};var s=document.createElement('script');s.onerror=function(){clearTimeout(tm);rej(new Error('err'));delete window[cb];};s.src=u;document.head.appendChild(s);}).catch(function(){return tryProxy(url,px,i+1);});}
+  if(p==='allorigins')return fetch('https://api.allorigins.win/get?url='+encodeURIComponent(url)).then(function(r){return r.json();}).then(function(d){return JSON.parse(d.contents);}).catch(function(){return tryProxy(url,px,i+1);});
+  if(p==='corsproxy')return fetch('https://corsproxy.io/?'+encodeURIComponent(url)).then(function(r){return r.json();}).catch(function(){return tryProxy(url,px,i+1);});
+}
+var PX=['jsonp','allorigins','corsproxy'];
+function getAPI(max,start,lbl){var u=BLOGGER_FEED+'?alt=json&max-results='+max;if(start)u+='&start-index='+start;if(lbl)u+='&category='+encodeURIComponent(lbl);return tryProxy(u,PX,0);}
+function gImg(p){if(p.media&&p.media.$t)return p.media.$t;var c=p.content?p.content.$t:'';var m=c.match(/<img[^>]+src="([^">]+)"/);return m?m[1]:'https://placehold.co/400x200/C8181E/fff?text=FB';}
+function gLbl(p){return p.category&&p.category.length?p.category[0].term:'';}
+function gUrl(p){if(p.link)for(var i=0;i<p.link.length;i++)if(p.link[i].rel==='alternate')return p.link[i].href;return '#';}
+function gEx(p,n){var c=p.content?p.content.$t:'';var t=c.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();return t.length>n?t.substring(0,n)+'...':t;}
+function gDt(d){var t=new Date(d);var m=['जाने','फेब्रु','मार्च','एप्रिल','मे','जून','जुलै','ऑग','सप्टें','ऑक्टो','नोव्हें','डिसें'];return t.getDate()+' '+m[t.getMonth()]+' '+t.getFullYear();}
+function gAu(p){return p.author?p.author[0].name.$t:'';}
+
+function renderFeatured(posts){
+  if(!posts||!posts.length)return;
+  var p=posts[0];
+  document.getElementById('feat-main').innerHTML='<a href="post.html?url='+encodeURIComponent(gUrl(p))+'" target="_blank" rel="noopener"><img src="'+gImg(p)+'" alt="'+p.title.$t+'" onerror="this.src=\'https://placehold.co/700x400/C8181E/fff?text=FB\'" loading="eager"/><div class="hero-grad"><div class="h-cat">'+(gLbl(p)||'बातमी')+'</div><div class="h-title">'+p.title.$t+'</div><div class="h-meta"><span>&#9998; '+gAu(p)+'</span><div class="h-dot"></div><span>'+gDt(p.published.$t)+'</span></div></div></a>';
+  var s='';
+  for(var i=1;i<Math.min(5,posts.length);i++){var sp=posts[i];s+='<div class="hs-card anim"><a href="post.html?url='+encodeURIComponent(gUrl(sp))+'" target="_blank" rel="noopener"><div class="hs-thumb"><img src="'+gImg(sp)+'" alt="'+sp.title.$t+'" onerror="this.src=\'https://placehold.co/106x90/eee/aaa?text=FB\'" loading="lazy"/></div><div class="hs-info">'+(gLbl(sp)?'<div class="hs-cat">'+gLbl(sp)+'</div>':'')+'<div class="hs-title">'+sp.title.$t+'</div><div class="hs-date">'+gDt(sp.published.$t)+'</div></div></a></div>';}
+  document.getElementById('feat-side').innerHTML=s;
+}
+
+function renderNews(posts){
+  if(!posts||!posts.length){document.getElementById('news-grid').innerHTML='<p style="color:var(--muted);grid-column:1/-1;padding:20px;font-size:13px">बातम्या आढळल्या नाहीत.</p>';return;}
+  var cards='',top=Math.min(3,posts.length);
+  for(var i=0;i<top;i++){var p=posts[i],ex=gEx(p,72);cards+='<a href="post.html?url='+encodeURIComponent(gUrl(p))+'" class="t3card anim"><div class="t3img"><img src="'+gImg(p)+'" alt="'+p.title.$t+'" onerror="this.src=\'https://placehold.co/400x152/f0f0f0/bbb?text=बातमी\'" loading="lazy"/>'+(gLbl(p)?'<div class="t3pill">'+gLbl(p)+'</div>':'')+'</div><div class="t3body"><div class="t3title">'+p.title.$t+'</div><div class="t3meta">&#9998; '+gAu(p)+' &#183; '+gDt(p.published.$t)+'</div>'+(ex?'<div class="t3ex">'+ex+'</div>':'')+'</div></a>';}
+  document.getElementById('news-grid').innerHTML=cards;
+  var list='';
+  for(var j=3;j<posts.length;j++){var lp=posts[j];list+='<div class="pl-item anim"><a href="post.html?url='+encodeURIComponent(gUrl(lp))+'"><div class="pl-thumb"><img src="'+gImg(lp)+'" alt="'+lp.title.$t+'" onerror="this.src=\'https://placehold.co/106x80/f0f0f0/bbb?text=FB\'" loading="lazy"/></div><div class="pl-body">'+(gLbl(lp)?'<div class="pl-cat">'+gLbl(lp)+'</div>':'')+'<div class="pl-title">'+lp.title.$t+'</div><div class="pl-meta">&#9998; '+gAu(lp)+' &#183; '+gDt(lp.published.$t)+'</div></div></a></div>';}
+  document.getElementById('post-list').innerHTML=list;
+}
+
+function renderPopular(posts){
+  var h='';
+  for(var i=0;i<Math.min(5,posts.length);i++){var p=posts[i];h+='<div class="rank-item"><div class="rk-n">0'+(i+1)+'</div><div>'+(gLbl(p)?'<div class="rk-cat">'+gLbl(p)+'</div>':'')+'<div class="rk-title"><a href="post.html?url='+encodeURIComponent(gUrl(p))+'">'+p.title.$t+'</a></div><div class="rk-date">'+gDt(p.published.$t)+'</div></div></div>';}
+  document.getElementById('popular-posts').innerHTML=h;
+}
+
+function renderTicker(posts){var t=posts.slice(0,8).map(function(p){return'&#9679; '+p.title.$t;}).join(' &nbsp;&nbsp;&nbsp; ');document.getElementById('ticker-text').innerHTML=t+' &nbsp;&nbsp;&nbsp;';}
+
+function changePage(dir){
+  currentPage+=dir;
+  document.getElementById('btn-prev').disabled=currentPage<=1;
+  document.getElementById('page-info').textContent='पृष्ठ '+currentPage;
+  document.getElementById('news-grid').innerHTML='<div class="ldg" style="grid-column:1/-1"><div class="ldot"></div><div class="ldot"></div><div class="ldot"></div></div>';
+  document.getElementById('post-list').innerHTML='';
+  window.scrollTo({top:document.getElementById('main').offsetTop-70,behavior:'smooth'});
+  getAPI(POSTS_PER_PAGE,(currentPage-1)*POSTS_PER_PAGE+1).then(function(data){var p=data.feed?(data.feed.entry||[]):[];renderNews(p);document.getElementById('btn-next').disabled=p.length<POSTS_PER_PAGE;});
+}
+
+function doSearch(){var q=document.getElementById('search-input').value.trim();if(q)window.location.href='search.html?q='+encodeURIComponent(q);}
+document.getElementById('search-input').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(function(){var b=document.getElementById('copy-btn');b.textContent='&#10003; Copied!';setTimeout(function(){b.innerHTML='&#9135; Copy';},2000);});}
+
+// Close mobile nav on outside click
+document.addEventListener('click',function(e){
+  var mn=document.getElementById('mob-nav');
+  var nb=document.getElementById('mob-btn');
+  if(mn.classList.contains('open')&&!mn.contains(e.target)&&e.target!==nb){
+    mn.classList.remove('open');
+    nb.innerHTML='&#9776;';
+  }
+});
+
+
+function loadSliderAds(posts) {
+  var adPosts = posts.filter(function(p) {
+    var lbls = p.category ? p.category.map(function(c){return c.term.toLowerCase();}) : [];
+    return lbls.indexOf('slider') > -1 || lbls.indexOf('advertisement') > -1 || lbls.indexOf('ad') > -1;
+  });
+  function setSlide(n, post) {
+    var img = gImg(post); if (!img) return;
+    var imgEl = document.getElementById('slide'+n+'-img');
+    var ph = document.getElementById('slide'+n+'-placeholder');
+    if (imgEl) { imgEl.src = img; imgEl.style.display = 'block'; imgEl.onload = function() { if(ph) ph.style.display='none'; }; }
+    document.getElementById('slide-'+n).onclick = function() { window.open(gUrl(post), '_blank'); };
+  }
+  if (adPosts[0]) setSlide(1, adPosts[0]);
+  if (adPosts[1]) setSlide(2, adPosts[1]);
+}
+
+// INIT
+getAPI(20).then(function(data){
+  var posts=data.feed?(data.feed.entry||[]):[];
+  allPosts=posts;if(!posts.length)return;
+  renderFeatured(posts);renderTicker(posts);renderPopular(posts);loadSliderAds(posts);
+  renderNews(posts.slice(5,5+POSTS_PER_PAGE));
+  document.getElementById('btn-next').disabled=posts.length<POSTS_PER_PAGE+5;
+}).catch(function(err){
+  console.error('API error, retrying in 3s:', err);
+  // Auto retry after 3 seconds silently
+  setTimeout(function(){
+    getAPI(20).then(function(data){
+      var posts=data.feed?(data.feed.entry||[]):[];
+      if(!posts.length) return;
+      renderFeatured(posts);renderTicker(posts);renderPopular(posts);loadSliderAds(posts);
+      renderNews(posts.slice(5,5+POSTS_PER_PAGE));
+      document.getElementById('btn-next').disabled=posts.length<POSTS_PER_PAGE+5;
+    }).catch(function(){
+      // Silent fail - keep loading dots
+    });
+  }, 3000);
+});
+</script>
+</body>
+</html>
